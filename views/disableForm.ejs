@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("partials/header") -%>
+
+<%- include("partials/sidebar") -%>
+
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-4">
+              <h1 class="m-0">Dashboard</h1>
+            </div>
+            <div class="col-md-5 offset-md-3">
+              <button class="btn btn-warning"
+                onclick="window.location.href='/charts/CompareAnalytics/<%= editObject._id %>'">ANALYTICS REPORT</button>
+              <button id="taskStatusButton" class="btn btn-warning">Task Status</button>
+              <button class="btn btn-danger" onclick="window.location.href='/logout'">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <section class="content">
+        <div class="container">
+
+          <!-- Task Management -->
+          <div class="row justify-content-center">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-2 offset-md-3">
+                  <div class="d-flex justify-content-center align-items-center">
+                    <button id="taskAliveButton" class="btn btn-primary " style="display:none;">Tasks Alive</button>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class=" mr-2 ml-2">
+                    <button id="taskFinishedButton" class="btn btn-primary" style="display:none;">Tasks Finised</button>
+                  </div>
+
+                </div>
+                <div class="col-md-2">
+                  <div class="d-flex ">
+                    <button id="createTaskBtn" class="btn btn-primary" style="display:none;">Create Task</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- tasks alive -->
+              <div class="row mt-4 p-3" id="alivePanel" style="display:none;border: 2px solid;">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                  <h4>Tasks to be Fininshed</h4>
+                </div>
+                <% for(var i=0;i<tasks.length;i++) { %>
+                  <% if(tasks[i].taskStatus==false) { %>
+                    <div class="col-4">
+                      <div class="card" style="background-color:darkgrey;">
+                        <div class="card-header">
+                          <h5 class="card-title">
+                            <%= tasks[i].taskTitle %>
+                          </h5>
+                        </div>
+                        <div class="card-body" style="background-color:white;">
+                          <h6 class="card-subtitle mb-2 text-muted">Not Yet Finished</h6>
+                          <p class="card-text">
+                            <%= tasks[i].taskDesc %>
+                          </p>
+                        </div>
+                        <form action="/tasks/alive/<%= tasks[i].achieverID %>/<%= tasks[i]._id %>" method="post">
+                          <div class="card-footer d-flex justify-content-center align-items-center btn-sm "
+                            style="background-color:white;">
+                            <button type="submit"" class=" btn btn-primary">Finish</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <%}%>
+                      <%}%>
+              </div>
+
+              <!-- task finished -->
+              <div class="row mt-4 p-3" id="finishedPanel" style="display:none;border: 2px solid;">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                  <h4>Tasks Fininshed</h4>
+                </div>
+                <% for(var i=0;i<tasks.length;i++) { %>
+                  <% if(tasks[i].taskStatus==true) { %>
+                    <div class="col-4">
+                      <div class="card" style="background-color:darkgrey;">
+                        <div class="card-header">
+                          <h5 class="card-title">
+                            <%= tasks[i].taskTitle %>
+                          </h5>
+                        </div>
+                        <div class="card-body" style="background-color:white;">
+                          <h6 class="card-subtitle mb-2 text-muted">Not Yet Finished</h6>
+                          <p class="card-text">
+                            <%= tasks[i].taskDesc %>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <%}%>
+                      <%}%>
+              </div>
+
+              <!-- tasks create -->
+              <div class="row mt-4" id="createPanel" style="display:none;border: 2px solid;">
+                <div class="text-dark">
+                  <h3>Create New Task :</h3>
+                </div>
+                <div class="col-9">
+                  <form class="p-3" action="/tasks/create/<%= editObject._id %>" method="post">
+                    <div class="form-group">
+                      <label for="achieverID">Achiever ID :</label>
+                      <input type="text" name="achieverID" class="form-control" id="achieverID"
+                        value="<%= editObject.EmpID %>" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label for="achieverName">Achiever Name :</label>
+                      <input type="text" name="achieverName" class="form-control" id="achieverName"
+                        value="<%= editObject.Employee_Name %>" readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                      <label for="taskTitle">Task Title :</label>
+                      <input type="text" name="taskTitle" class="form-control" id="taskTitle">
+                    </div>
+                    <div class="form-group">
+                      <label for="taskDesc">Task Description :</label>
+                      <textarea name="taskDesc" class="form-control" id="taskDesc" rows="3"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                      <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                      <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Details -->
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <form action="/save" method="post">
+                <div class="card card-info m-3">
+                  <div class="card-header">
+                    <h3 class="card-title">Employee Details</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <% for(var [x,y] of Object.entries(editObject)) { %>
+                        <% if(x=="_id" ) { continue; } %>
+                          <div class="col-4">
+                            <label for="<%= x %>">
+                              <%= x %> :
+                            </label>
+                            <div class="card ">
+                              <input type="text" class="form-control" id="<%= x %>" placeholder="<%= x %>"
+                                name="<%= x %>" value="<%= y %>" readonly>
+                            </div>
+                          </div>
+
+                          <% } %>
+                    </div>
+
+                    <input type="hidden" id="monid" name="monid" value="<%= editObject._id %>">
+
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+<%- include("partials/footer") -%>
+
+
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("partials/header") -%>
+
+<%- include("partials/sidebar") -%>
+
+  <div class="content-wrapper">
+    <%- include("partials/rightcorner") -%> 
+    <section class="content">
+
+      <!--analytics modal -->
+      <div class="modal fade" id="analyticsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Analytics Mode</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/charts/analytics" method="get">
+                <label for="analyticsType">Select one from below</label>
+                <select id="analyticsType" name="analyticsType" class="form-control">
+                  <option value="ManagerName">Managers Wise Count</option>
+                  <option value="Sex">Gender Count Info</option>
+                  <option value="RaceDesc">Race Description</option>
+                  <option value="RecruitmentSource">Recruitment Source</option>
+                  <option value="PerformanceScore">Performance Count</option>
+                  <option value="CitizenDesc">Citizen Description</option>
+                  <option value="MaritalDesc">Marital Description</option>
+                  <option value="Position">Designation Wise</option>
+                  <option value="Department">Department Wise Count</option>
+                  <option value="EmploymentStatus">Employment Status Info</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Proceed</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1vs1 analytics Modal -->
+      <div class="modal fade" id="1vs1Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">1 Vs 1 Mode</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/charts/1vs1Analytics" method="get">
+                <div class="form-group">
+                  <label for="emp1">Employee_1 ID</label><br>
+                  <input type="text" id="emp1" name="emp1" placeholder="Enter Employee ID" class="form-control"
+                    onchange="validate('emp1','1')" autocomplete="false" required>
+                </div>
+                <small id="errTag1" class="text-danger font-weight-bold"></small>
+                <div class="form-group">
+                  <label for="emp2">Employee_2 ID</label><br>
+                  <input type="text" id="emp2" name="emp2" placeholder="Enter Employee ID" class="form-control"
+                    onchange="validate('emp2','2')" autocomplete="false" required>
+                </div>
+                <small id="errTag2" class="text-danger font-weight-bold"></small>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Proceed</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="jumbotron d-flex align-items-center min-vh-100">
+        <div class="container">
+          <div class="row mb-10"></div>
+          <div class="row justify-content-center">
+            
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-indigo">
+                  <div class="inner">
+                          <h4>Employee details</h4>
+                          <a href="/data"><button type="button" class="btn btn-primary" style="align-content: center;">Veiw</button></a>
+                          <h3></h3>
+                  </div>
+                  <div class="icon">
+                      <i class="ion ion-clipboard"></i>
+                  </div>
+                  
+              </div>
+          </div>
+            
+            
+            <div class="col-md-3">
+              <div class="card" style="width: 13rem;">
+                <img class="card-img-top" src="images/employees.png" alt="Card image cap">
+                <div class="card-body">
+                  <a href="/data" class="btn btn-primary">Employees</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="width: 13rem;">
+                <img class="card-img-top" src="images/performance.png" alt="Card image cap">
+                <div class="card-body">
+                  <a class="btn btn-primary" data-toggle="modal"
+                    data-target="#analyticsModal">Performance</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="width: 13rem;">
+                <img class="card-img-top" src="images/1vs1.png" alt="Card image cap">
+                <div class="card-body">
+                  <a data-target="#1vs1Modal" data-toggle="modal" class="btn btn-primary">1 vs 1</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="width: 13rem;">
+                <img class="card-img-top" src="images/helpdesk.png" alt="Card image cap">
+                <div class="card-body">
+                  <a href="/deptartment_Analytics_Page" class="btn btn-primary">Dept. Analytics</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="width: 13rem;">
+                <img class="card-img-top" src="images/managers.png" alt="Card image cap">
+                <div class="card-body">
+                  <a href="/Managers_Analytics_Page" class="btn btn-primary">Managers Analytics</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="width: 13rem;">
+                <img class="card-img-top" src="images/ml.png" alt="Card image cap">
+                <div class="card-body">
+                  <a href="/ml_page" class="btn btn-primary">Test Data</a>
+                </div>
+              </div>
+            </div>
+           
+            <!-- /.col -->
+          </div>
+          
+          <!-- /.row -->
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <%- include("partials/footer") -%>
+
+    <script>
+
+      function validate(empID, num) {
+        var emp = $('#' + empID).val();
+        $.ajax(
+          {
+            url: '/validateIDs',
+            method: 'post',
+            dataType: 'json',
+            data: {
+              'empID': emp,
+            },
+            success: function (response) {
+              $('#errTag' + num).html(response['errMsg'])
+            },
+            error: function (response) {
+              alert("Server Error Occured")
+            }
+          }
+        )
+      }
+
+    </script>
+    </body>
+
+</html>
