@@ -56,7 +56,11 @@ app.use('/register', register)
 app.use('/operations', operationsOnData)
 app.use('/tasks', tasks)
 
-
+app.get('/homepage',(req,res)=>{
+    un=req.session.name
+    var obj={"username":un,"name":un,"log":"login","ct":"","clock":""}
+    res.render('homepage',obj)
+})
 
 app.post('/validateEmail/:id', (req, res) => {
 
