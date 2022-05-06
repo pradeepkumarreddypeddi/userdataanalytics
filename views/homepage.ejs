@@ -151,11 +151,11 @@
                             <ol class="breadcrumb float-sm-right">
                                 <% if(log=='login'){%>
                                     <%} else {%>
-                                        <li class="breadcrumb-item"><a href="/log/in">Login</a></li>
+                                        <li class="breadcrumb-item"><a href="/login">Login</a></li>
                                     <%}%>
                                 <% if(log=='login'){%>
                                 <li class="breadcrumb-item active"><a href="/cp">Change password</a></li>
-                                <li class="breadcrumb-item active"><a href="/log/out">Logout</a></li>
+                                <li class="breadcrumb-item active"><a href="/logout">Logout</a></li>
                                 <%} else {%>
                                 <li class="breadcrumb-item active"><a href="/reg">Sign In</a></li>
                                 <%}%>
@@ -178,7 +178,7 @@
                                 <div class="inner">
                                     <% if(log=='login'){%>
                                     <h3  style="font-size: 1.85em">Clock</h3>
-                                    <a href="/cin"><button type="button" class="btn btn-primary">Clock in</button></a> / <a href="/cout"><button type="button" class="btn btn-primary">Clock out</button></a>
+                                    <a href="/clock/cin"><button type="button" class="btn btn-primary">Clock in</button></a> / <a href="/clock/cout"><button type="button" class="btn btn-primary">Clock out</button></a>
                                     <% } else {%>
                                         <h4 style="font-size: 1.6em"> Please login for clock In   
                                         </h4>

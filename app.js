@@ -14,6 +14,8 @@ var login = require('./routes/login')
 var register = require('./routes/register')
 var operationsOnData = require('./routes/operationsOnData')
 var tasks = require('./routes/tasks')
+var clock = require('./routes/clock')
+var leave = require('./routes/leave')
 
 
 var app = express();
@@ -55,6 +57,8 @@ app.use('/login', login)
 app.use('/register', register)
 app.use('/operations', operationsOnData)
 app.use('/tasks', tasks)
+app.use('/clock', clock)
+app.use('/leave', leave)
 
 app.get('/homepage',(req,res)=>{
     un=req.session.name
@@ -148,7 +152,7 @@ app.get('/ml_page', async(req,res)=>{
     catch (error) {
         console.log(error)
     }
-    res.render('ml5',{data:data,name:req.session.name})
+    res.render('analysis',{data:data,name:req.session.name})
 })
 app.get('/Managers_Analytics_Page', async (req, res) => {
     var managersDetails = await database.getDB().collection('ManagersDB').find({}).toArray()
