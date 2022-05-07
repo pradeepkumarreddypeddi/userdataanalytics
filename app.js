@@ -65,7 +65,11 @@ app.get('/homepage',(req,res)=>{
     var obj={"username":un,"name":un,"log":"login","ct":"","clock":""}
     res.render('homepage',obj)
 })
-
+app.get('/att',(req,res)=>{
+    un=req.session.name
+    var obj={"username":un,"name":un,"log":"login","ct":"","clock":""}
+    res.render('calender',obj) 
+})
 app.post('/validateEmail/:id', (req, res) => {
 
     if (req.body.email.toLowerCase().match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/) == null) {

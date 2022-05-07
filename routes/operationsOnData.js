@@ -112,7 +112,51 @@ router.get('/edit/:id', (req, res) => {
     })
 
 })
+router.get('/add', (req, res) => {
+    var Empno;
+    var managers
+   async function no(){ 
+   let n=await database.getDB().collection('EmployeeDetails').aggregate([
+    {
+      '$sort': {
+        'EmpID': -1
+      }
+    }, {
+      '$limit': 1
+    }
+  ]).toArray()
+  Empno=n[0].EmpID+1;
 
+    var m= await database.getDB().collection('ManagersDB').find({}).toArray()
+    managers=m;
+    console.log(m)
+  
+
+    const deptPromiseFind = new Promise((resolve, reject) => {
+        database.getDB().collection('DepartmentsDB').find({}).toArray((err, res1) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(res1);
+            }
+        })
+    })
+    const posPromiseFind = new Promise((resolve, reject) => {
+        database.getDB().collection('Positions DB').find({}).toArray((err, res1) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(res1);
+            }
+        })
+    }) 
+   Promise.all([deptPromiseFind,posPromiseFind]).then((result) => {
+        res.render('form', { name: req.session.name,"EmpID":Empno,"positions":result[1],"managers":managers, "editObject": {}, depts:result[0], mode: "newForm" })
+    })
+}no();   
+})
 
 router.get('/restore/:id', (req, res) => {
 
