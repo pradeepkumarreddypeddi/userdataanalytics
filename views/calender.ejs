@@ -255,6 +255,19 @@
             free: false,
             color: '#f44437'
         }]
+       '<% for(let i=0;i<leave.length;i++) {%>'
+        var obj={
+            id: 5,
+            start: '<%=leave[i].fdate%>T10:30',
+            end: '<%=leave[i].tdate%>T11:30',
+            title: '<%=leave[i].reason%>',
+            description: '',
+            allDay: false,
+            free: false,
+            color: '#f44437' 
+        }
+        att.push(obj)
+        '<%}%>'
     var oldEvent,
         tempEvent = {},
         deleteEvent,

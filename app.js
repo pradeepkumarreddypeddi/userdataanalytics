@@ -16,7 +16,8 @@ var operationsOnData = require('./routes/operationsOnData')
 var tasks = require('./routes/tasks')
 var clock = require('./routes/clock')
 var leave = require('./routes/leave')
-
+var about = require('./routes/about')
+var usertasks = require('./routes/usertasks')
 
 var app = express();
 
@@ -44,30 +45,46 @@ app.use(session({
 
 app.use(async (req, res, next) => {
     try {
-        await database.connectDB()
+        await database.connectDB(); 
+    } catch (error) {
+        console.log(error)
+    }
+    next()
+})
+var abt;
+
+
+
+app.use('/login', login)
+app.use('/register', register)
+app.use(async (req, res, next) => {
+    try {
+     abt=await database.getDB().collection("users").findOne({'name':req.session.name})
     } catch (error) {
         console.log(error)
     }
     next();
 })
-
 app.use('/charts', chartsJS)
 app.use('/displayData', displayWholeData)
-app.use('/login', login)
-app.use('/register', register)
 app.use('/operations', operationsOnData)
 app.use('/tasks', tasks)
 app.use('/clock', clock)
 app.use('/leave', leave)
+app.use('/about', about)
+app.use('/taskview', usertasks)
 
-app.get('/homepage',(req,res)=>{
+app.get('/homepage',async(req,res)=>{
     un=req.session.name
-    var obj={"username":un,"name":un,"log":"login","ct":"","clock":""}
+    var abt=await database.getDB().collection("users").findOne({'name':req.session.name})
+    var obj={"username":un,"name":un,"log":"login","ct":"","clock":"","obj":abt}
     res.render('homepage',obj)
 })
-app.get('/att',(req,res)=>{
+app.get('/att',async(req,res)=>{
     un=req.session.name
-    var obj={"username":un,"name":un,"log":"login","ct":"","clock":""}
+    var att=await database.getDB().collection('leave').find({uid:un}).toArray()
+    console.log(att)
+    var obj={"username":un,"name":un,"log":"login","ct":"","clock":"","leave":att,"obj":abt}
     res.render('calender',obj) 
 })
 app.post('/validateEmail/:id', (req, res) => {
@@ -130,7 +147,7 @@ app.post("/validateIDs", (req, res) => {
 
 app.get("/", (req, res) => {
     if (req.session.auth) {
-        res.redirect('/home')
+        res.redirect('/homepage')
     }
     else {
         res.render('login')
@@ -140,7 +157,7 @@ app.get("/", (req, res) => {
 
 app.get('/home', (req, res) => {
     if (req.session.auth) {
-        res.render('home', { name: req.session.name });
+        res.render('home', { name: req.session.name ,"obj":abt});
     }
     else {
         res.render('unauthorized')
@@ -156,16 +173,16 @@ app.get('/ml_page', async(req,res)=>{
     catch (error) {
         console.log(error)
     }
-    res.render('analysis',{data:data,name:req.session.name})
+    res.render('analysis',{data:data,name:req.session.name,"obj":abt})
 })
 app.get('/Managers_Analytics_Page', async (req, res) => {
     var managersDetails = await database.getDB().collection('ManagersDB').find({}).toArray()
-    res.render('managersAnalysis', { name: req.session.name, managers: managersDetails })
+    res.render('managersAnalysis', { name: req.session.name, managers: managersDetails,"obj":abt })
 })
 
 app.get('/deptartment_Analytics_Page', (req, res) => {
     database.getDB().collection('DepartmentsDB').find({}).toArray((err, res1) => {
-        res.render('deptAnalytics', { name: req.session.name, depts: res1 })
+        res.render('deptAnalytics', { name: req.session.name, depts: res1 ,"obj":abt})
     })
 })
 
@@ -176,7 +193,7 @@ app.get('/trash', async (req, res) => {
     } catch (error) {
         alert(error)
     }
-    res.render('index', { tableArray: trashbinData, name: req.session.name, mode: "trashbin" })
+    res.render('index', { tableArray: trashbinData, name: req.session.name, mode: "trashbin","obj":abt })
 })
 
 app.get('/form', async (req, res) => {
@@ -187,7 +204,7 @@ app.get('/form', async (req, res) => {
         var managersDetails = await await database.getDB().collection('ManagersDB').find({}).toArray()
         console.log(managersDetails)
         var lastEmpID = await database.getDB().collection('EmployeeDetails').find({}).sort({ EmpID: -1 }).limit(1).toArray()
-        res.render('form', { name: req.session.name, EmpID: lastEmpID[0].EmpID + 1, mode: "newForm", depts: deptDetails, positions: positionDetails, managers: managersDetails })
+        res.render('form', { name: req.session.name, EmpID: lastEmpID[0].EmpID + 1, mode: "newForm", depts: deptDetails, positions: positionDetails, managers: managersDetails,"obj":abt })
 
     }
     else {
@@ -199,7 +216,7 @@ app.get('/data', (req, res) => {
     if (req.session.auth == true) {
         database.getDB().collection('EmployeeDetails').find({}).toArray((err, res1) => {
             if (err) throw err;
-            res.render('index', { tableArray: res1, name: req.session.name, mode: "employees" });
+            res.render('index', { tableArray: res1, name: req.session.name, mode: "employees","obj":abt });
         })
     }
     else {

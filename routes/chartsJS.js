@@ -27,7 +27,15 @@ router.use(async (req, res, next) => {
     await database.connectDB();
     next()
 })
-
+var abt;
+router.use(async (req, res, next) => {
+    try {
+     abt=await database.getDB().collection("users").findOne({'name':req.session.name})
+    } catch (error) {
+        console.log(error)
+    }
+    next();
+})
 router.get("/managerAnalysis", async (req, res) => {
 
     if(req.query.manager1=='None' || req.query.manager2=='None'){
@@ -197,7 +205,7 @@ router.get("/analytics", async (req, res) => {
         labels.push(res1['_id'])
         dataSet.push(res1['Count'])
     })
-    res.render('charts', { labels: labels, dataSet: dataSet, name: req.session.name })
+    res.render('charts', { labels: labels, dataSet: dataSet, name: req.session.name,"obj":abt })
 })
 
 
@@ -247,7 +255,7 @@ router.get("/CompareAnalytics/:id", (req, res) => {
     promises.push(ownResultPromise)
     Promise.all(promises).then((res1) => {
         avgResults = res1;
-        res.render('compareCharts', { labels: labels, dataSet: dataSet, name: req.session.name, avgResults: avgResults, mode: "avgCompare", emp1_Id: "", emp2_Id: "" })
+        res.render('compareCharts', { labels: labels, dataSet: dataSet, name: req.session.name, avgResults: avgResults, mode: "avgCompare", emp1_Id: "", emp2_Id: "","obj":abt })
     })
 })
 
@@ -266,7 +274,7 @@ router.get("/1vs1Analytics", async (req, res) => {
         console.log(err)
     }
 
-    res.render('compareCharts', { labels: labels, dataSet: Object.values(empData1), name: req.session.name, avgResults: Object.values(empData2), mode: "1vs1Compare", emp1_Id: req.query.emp1, emp2_Id: req.query.emp2 })
+    res.render('compareCharts', { labels: labels, dataSet: Object.values(empData1), name: req.session.name, avgResults: Object.values(empData2), mode: "1vs1Compare", emp1_Id: req.query.emp1, emp2_Id: req.query.emp2,"obj":abt })
 })
 
 

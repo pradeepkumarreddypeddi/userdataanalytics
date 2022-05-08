@@ -33,6 +33,15 @@ router.use(async (req, res, next) => {
     }
     next()
 })
+var abt;
+router.use(async (req, res, next) => {
+    try {
+     abt=await database.getDB().collection("users").findOne({'name':req.session.name})
+    } catch (error) {
+        console.log(error)
+    }
+    next();
+})
 
 
 router.get('/delete/:id/:id1', (req, res) => {
@@ -108,7 +117,7 @@ router.get('/edit/:id', (req, res) => {
         })
     })
     Promise.all([empPromiseFind, deptPromiseFind]).then((result) => {
-        res.render('form', { name: req.session.name, "editObject": result[0], depts: result[1], mode: "editable" })
+        res.render('form', { name: req.session.name, "editObject": result[0], depts: result[1], mode: "editable","obj":abt })
     })
 
 })
@@ -153,7 +162,7 @@ router.get('/add', (req, res) => {
         })
     }) 
    Promise.all([deptPromiseFind,posPromiseFind]).then((result) => {
-        res.render('form', { name: req.session.name,"EmpID":Empno,"positions":result[1],"managers":managers, "editObject": {}, depts:result[0], mode: "newForm" })
+        res.render('form', { name: req.session.name,"EmpID":Empno,"positions":result[1],"managers":managers, "editObject": {}, depts:result[0], mode: "newForm","obj":abt })
     })
 }no();   
 })

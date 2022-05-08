@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("partials/header") -%>
+
+<%- include("partials/sidebar") -%>
+
+  <div class="content-wrapper">
+    <%- include("partials/rightcorner") -%> 
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card" style="width: 50%;">
+                
+                                <!-- /.card-header -->
+                                <div class="card-body" >
+                                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6"></div>
+                                            <div class="col-sm-12 col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-6"></div>
+                                                        <div class="col-sm-12 col-md-6"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 col-md-6"></div>
+                                                                    <div class="col-sm-12 col-md-6"></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-12 col-md-6"></div>
+                                                                                            <div class="col-sm-12 col-md-6"></div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-12">
+                                                                                                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12 col-md-6"></div>
+                                                                                                        <div class="col-sm-12 col-md-6"></div>
+                                                                                                    </div>
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                                                                                <div class="row">
+                                                                                                                    <div class="col-sm-12 col-md-6"></div>
+                                                                                                                    <div class="col-sm-12 col-md-6"></div>
+                                                                                                                </div>
+                                                                                                                <div class="row">
+                                                                                                                    <div class="col-sm-12">
+                                                                                                                        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                                                                                                                            <thead>
+                                                                                                                                                                                                     
+                                                                                                                                <tr>
+                                                                                                                                    <th>#</th>
+                                                                                                                                    <th>Task name</th>
+                                                                                                                                    <th>To be completed by</th>
+                                                                                                                                    <th>Progress</th>
+                                                                                                                                    <th>Actions</th>
+
+
+                                                                                                                                </tr>
+                                                                                                                            </thead>
+                                                                                                                            <tbody>
+                                                                                                                                <% for(let i=0; i<tdata.length; i++){ %>
+                                                                                                                                    <tr>
+                                                                                                                                        <td><%=i+1%></td>
+                                                                                                                                        <td><%=tdata[i].tn%></td>
+                                                                                                                                        <td><%=tdata[i].tdate%></td>
+                                                                                                                                        <td><div class="progress progress-xs">
+                                                                                                                                            <div class="progress-bar progress-bar-danger"style="width:<%=tdata[i].prog%>% "></div>
+                                                                                                                                            </div></td>
+                                                                                                                
+                                                                                                                                        <td><a href="/veiwtask/<%=tdata[i]._id%>"> <button class="btn btn-primary"style="background-color: chocolate; border-color:chocolate " >Veiw</button></a> <% if(username=='abd'){%> <a  href="/com/<%=tdata[i]._id%>"onclick="return conf()" ><button class="btn btn-primary" style="background-color: rgb(205, 104, 3); border-color:rgb(205, 104, 3) ">Completed</button></a> <%}%></td> 
+
+                                                                                                                                    </tr>
+
+                                                                                                                                    <%}%>
+                                                                                                                                    
+                                               
+                                                                                                                            </tbody>
+                                                                                                            
+
+                                                                                                                        </table>
+                                                                                                                        <% if(username=='abd'){%>
+                                                                                                                                
+                                                                                                                            <button type="submit" class="btn btn-info" onclick="funcr();">Add New Task</button>
+                                                                                                                            <%} %>
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row __web-inspector-hide-shortcut__"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- /.content -->
+    </div>
+    
+
+    <!-- jQuery -->
+    <script src="/javascripts/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <!-- <script src="javascripts/jquery.dataTables.min.js"></script> ascending and descnding few things are commented in js -->
+    <script src="/javascripts/dataTables.bootstrap4.min.js"></script>
+    <script src="/javascripts/dataTables.responsive.min.js"></script>
+    <script src="/javascripts/responsive.bootstrap4.min.js"></script>
+    <script src="/javascripts/dataTables.buttons.min.js"></script>
+    <script src="/javascripts/buttons.bootstrap4.min.js"></script>
+    <script src="/javascripts/jszip.min.js"></script>
+    <script src="/javascripts/pdfmake.min.js"></script>
+    <script src="/javascripts/vfs_fonts.js"></script>
+    <script src="/javascripts/buttons.html5.min.js"></script>
+    <script src="/javascripts/buttons.print.min.js"></script> 
+    <script src="/javascripts/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/javascripts/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="../../dist/js/demo.js"></script> -->
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+    
+    <script>
+        function conf(e){
+            if(confirm("do you want to remove task")){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    </script>
+    <script>
+        function funcr(){
+        window.location.href = "/addtask";
+        }
+    </script>
+    
+
+
+</body>
+
+</html>

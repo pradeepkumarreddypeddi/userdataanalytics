@@ -31,7 +31,15 @@ router.use(async (req, res, next) => {
     next()
 })
 
-
+var abt;
+router.use(async (req, res, next) => {
+    try {
+     abt=await database.getDB().collection("users").findOne({'name':req.session.name})
+    } catch (error) {
+        console.log(error)
+    }
+    next();
+})
 router.post('/:id/:id1/:id2?', (req, res) => {
     var mode = req.params.id;
     var empid = req.params.id1;

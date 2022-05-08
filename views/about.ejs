@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("partials/header") -%>
+
+<%- include("partials/sidebar") -%>
+
+  <div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">About</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+      
+                <li class="breadcrumb-item active"><a href="/logout">Logout</a></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+            
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-6">
+                            <!-- general form elements -->
+                            <div class="card card-primary" >
+                                <div class="card-header" style="background-color:lightsalmon">
+                                    <h3 class="card-title">Registration page</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+
+                                <form name="userform" method="post" action="/about/user" enctype="multipart/form-data">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="en">Username</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Username" value="<%=obj.name%>">
+                                        </div>
+                                        
+                                       
+                                        <div class="form-group">
+                                            <label for="en">Email</label>
+                                            <input type="email" class="form-control" id="umail" name="umail" placeholder="email id" value="<%=obj.email%>">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Photo</label>
+                                            <input type="file" class="form-control" id="photo" name="photo" title="hi " value="<%=obj.photo%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" id="usid" name="usid" placeholder="_id" value="<%=obj._id%>">
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary"  style="background-color:lightsalmon" >Upadate</button>
+                                    </div>
+                                </form>
+                            </div>
+            
+
+                        </div>
+                        <!--/.col (left) -->
+                        <!-- right column -->
+
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+    
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="javascripts/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="javascripts/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <!-- <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script> -->
+    <!-- AdminLTE App -->
+    <script src="javascripts/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="../../dist/js/demo.js"></script> -->
+    <!-- Page specific script -->
+
+  
+   
+
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
+<script>
+    function funr(){
+    window.location.href = "/reg";
+    //alert("succesfully registered");
+    }
+</script>
+</body>
+
+</html>

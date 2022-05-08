@@ -198,7 +198,7 @@
 
 
                         <div class="col-lg-3 col-6">
-                            <div class="small-box bg-success">
+                            <div onclick="window.location='/leave'" class="small-box bg-success">
                                 <div class="inner">
                                     <% if(log=='login'){%>
                                         <h3>Apply Leave </h3>
@@ -219,11 +219,11 @@
                         </div>
 
                         <div class="col-lg-3 col-6">
-                            <div class="small-box bg-info">
+                            <div onclick="window.location='/about'" class="small-box bg-info">
                                 <div class="inner">
                                     <% if(log=='login'){%>
                                         <h3>Details</h3>
-                                        <a href="/veiw"><button type="button" class="btn btn-primary">Veiw</button></a>
+                                        <a href="/about"><button type="button" class="btn btn-primary">Veiw</button></a>
                                         <% } else {%>
                                             <h4></h4>
                                             <h4>   
@@ -248,7 +248,7 @@
                                 <div class="icon">
                                     <i class="ion ion-help"></i>
                                 </div>
-                                <a href="/help"onclick="return help()" class="small-box-footer">Find Answers<i
+                                <a href="https://darwinbox.com/"onclick="return help()" class="small-box-footer">Find Answers<i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -258,10 +258,10 @@
                     <div class="row">
 
                         <div class="col-lg-3 col-6">
-                            <div class="small-box bg-indigo">
+                            <div onclick="window.location='/taskview'" class="small-box bg-indigo">
                                 <div class="inner">
                                         <h3>Tasks</h3>
-                                        <a href="/taskveiw"><button type="button" class="btn btn-primary" style="align-content: center;">Veiw</button></a>
+                                        <a href="/taskview"><button type="button" class="btn btn-primary" style="align-content: center;">Veiw</button></a>
                                         <h3></h3>
                                 </div>
                                 <div class="icon">
@@ -273,7 +273,7 @@
                         
 
                         <div class="col-lg-3 col-6">
-                          <div class="small-box bg-orange">
+                          <div onclick="window.location='/home'"  class="small-box bg-orange">
                               <div class="inner">
                                       <h3>Analysis</h3>
                                       <a href="/home"><button type="button" class="btn btn-primary" style="align-content: center;">Veiw</button></a>
@@ -286,6 +286,19 @@
                           </div>
                       </div>
 
+                      <div  class="col-lg-3 col-6">
+                        <div onclick="window.location='/att'" class="small-box bg-yellow">
+                            <div class="inner">
+                                    <h3>Attendance</h3>
+                                    <a href="/att"><button type="button" class="btn btn-primary" style="align-content: center;">Veiw</button></a>
+                                    <h3></h3>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-monitor"></i>
+                            </div>
+                            
+                        </div>
+                    </div>
                     </div>
                            
 

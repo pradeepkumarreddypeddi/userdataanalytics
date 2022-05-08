@@ -32,7 +32,15 @@ router.use(async (req, res, next) => {
     next()
 })
 
-
+var abt;
+router.use(async (req, res, next) => {
+    try {
+     abt=await database.getDB().collection("users").findOne({'name':req.session.name})
+    } catch (error) {
+        console.log(error)
+    }
+    next();
+})
 router.get('/:id/:id1', async (req, res) => {
 
     let empData;
@@ -44,7 +52,7 @@ router.get('/:id/:id1', async (req, res) => {
         console.log(error)
     }
     console.log(taskData)
-    res.render('disableForm', { "editObject": empData, name: req.session.name, "tasks": taskData });
+    res.render('disableForm', { "editObject": empData, name: req.session.name, "tasks": taskData,"obj":abt });
 
 })
 

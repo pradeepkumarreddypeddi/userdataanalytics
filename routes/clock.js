@@ -29,6 +29,15 @@ router.use(async (req, res, next) => {
     }
     next()
 })
+var abt;
+router.use(async (req, res, next) => {
+    try {
+     abt=await database.getDB().collection("users").findOne({'name':req.session.name})
+    } catch (error) {
+        console.log(error)
+    }
+    next();
+})
 router.get('/cin', (req, res) => {
     if( req.session.auth == true){
      c=1;
@@ -38,7 +47,7 @@ router.get('/cin', (req, res) => {
          "clock in":cin
      }
      un=req.session.name
-     var obj={"name":un,"username":un,"log":"login","ct":cin,"clock":"Clock in at:"}
+     var obj={"name":un,"username":un,"log":"login","ct":cin,"clock":"Clock in at:","obj":abt}
      database.getDB().collection("users").updateOne({"name":un},{$set:cdata}, function(err, response) {
      res.render("homepage",obj);
      })
@@ -54,7 +63,7 @@ router.get('/cout', (req, res) => {
     } 
      un=req.session.name
      database.getDB().collection("users").updateOne({"name":un},{$set:cdata}, function(err, response) {
-     var obj={"name":un,"username":un,"log":"login","ct":cout,"clock":"Clock out at"}
+     var obj={"name":un,"username":un,"log":"login","ct":cout,"clock":"Clock out at","obj":abt}
      res.render("homepage",obj);
      })
     }

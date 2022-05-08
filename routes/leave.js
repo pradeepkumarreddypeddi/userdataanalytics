@@ -23,12 +23,20 @@ router.use(session({
 
 
 
-
+var abt;
+router.use(async (req, res, next) => {
+    try {
+     abt=await database.getDB().collection("users").findOne({'name':req.session.name})
+    } catch (error) {
+        console.log(error)
+    }
+    next();
+})
 
 router.get('/', (req, res) => {
     if(req.session.name){
     un=req.session.name;
-    var ob={"obj":{},"username":un,"name":un};
+    var ob={"obj":abt,"username":un,"name":un};
     res.render("leave",ob)
     }
     else{
@@ -58,7 +66,7 @@ router.post('/apply', (req, res) => {
       
       var mailOptions = {
         from: 'uiop2216@gmail.com',
-        to: 'pradeep.p@darwinbox.io',
+        to: 'pradeepkumarreddypeddi739@gmail.com',
         subject: 'Leave application',
         text:'Type: '+udata.type+"       from: "+udata.fdate+"       to: "+udata.tdate+'              Reason: '+udata.reason
       };
@@ -69,7 +77,9 @@ router.post('/apply', (req, res) => {
         } else {
           console.log('Email sent successfully');
           alert("your leave sent to your manager successfully");
-          res.redirect("/homepage")
+          database.getDB().collection('leave').insertOne(udata, (err, res1) => {
+            res.redirect('/homepage')
+          })
         }
       });
 
