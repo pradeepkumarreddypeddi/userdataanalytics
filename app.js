@@ -18,7 +18,7 @@ var clock = require('./routes/clock')
 var leave = require('./routes/leave')
 var about = require('./routes/about')
 var usertasks = require('./routes/usertasks')
-
+var changepass = require('./routes/changepass')
 var app = express();
 
 
@@ -73,6 +73,7 @@ app.use('/clock', clock)
 app.use('/leave', leave)
 app.use('/about', about)
 app.use('/taskview', usertasks)
+app.use('/cp', changepass)
 
 app.get('/homepage',async(req,res)=>{
     un=req.session.name
