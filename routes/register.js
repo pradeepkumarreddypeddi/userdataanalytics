@@ -74,6 +74,7 @@ router.post("/registerSave", (req, res) => {
                             "name": req.body.ename,
                             "email": req.body.email,
                             "password": req.body.password,
+                            "photo":""
                         }
                         var passHash = bcrypt.hash(newUser.password, 10);
                         passHash.then((val) => {

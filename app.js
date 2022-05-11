@@ -228,7 +228,7 @@ app.get('/data', (req, res) => {
 
 
 app.post('/unauthorized', (req, res) => {
-    res.redirect('/')
+    res.render('unauthorized')
 })
 
 
