@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-
+const jwt=require('jsonwebtoken');
 var session = require('express-session');
 const { v4: uuidv4 } = require('uuid');
 var bcrypt = require('bcryptjs');
@@ -58,7 +58,19 @@ router.post('/', async(req, res) => {
             else {
                 req.session.auth = true;
                 req.session.name = userData.name;
-                res.json({
+                console.log("in jwt");
+ 
+                jwt.sign({userData}, 'secretkey',{expiresIn:'6000s' }, (err, token) => {
+                    console.log("in jwt");
+                    res.cookie("jwt",token,{
+                        httpOnly:true,
+                      })
+                      res.json({
+                        success:true,
+                        message:"success"
+                    })  
+                  });
+                  res.json({
                     msg: "success"
                 })
             }

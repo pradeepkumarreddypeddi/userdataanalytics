@@ -6,6 +6,8 @@ var alert= require('alert');
 var session = require('express-session');
 const { v4: uuidv4 } = require('uuid');
 const database = require('./database');
+var jwtauth = require('./jwtauth')
+
 var c="";
 router.use(express.static('public'));
 router.use(session({
@@ -32,6 +34,7 @@ router.use(async (req, res, next) => {
     }
     next();
 })
+//router.use(jwtauth)
 
 router.get('/', (req, res) => {
     if(req.session.name){
